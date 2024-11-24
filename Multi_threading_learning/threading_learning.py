@@ -1,15 +1,17 @@
-from time import sleep,perf_counter
+from threading import Thread
+import time
 
-def task():
-    print("Starting a task")
-    sleep(1)
-    print("done")
 
-start_time = perf_counter()
+def show_timer():
+    count = 0
+    while True:
+        count += 1
+        time.sleep(1)
+        print(f'Has been waiting for {count} second(s)...')
 
-task()
-task()
 
-end_time = perf_counter()
+#t = Thread(target=show_timer, daemon=True)
+t = Thread(target=show_timer)
+t.start()
 
-print(f'It took {end_time- start_time: 0.2f} second(s) to complete.')
+answer = input('Do you want to exit?\n')
